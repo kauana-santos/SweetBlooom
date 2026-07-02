@@ -18,8 +18,16 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
-    public Produto criarProduto(ProdutoRequestDTO dto){
+    public Produto criarProduto(ProdutoRequestDTO dto) {
+        Produto produto = Produto.builder()
+                .name(dto.name())
+                .description(dto.description())
+                .price(dto.price())
+                .category(dto.category())
+                .avaliabe(dto.avaliabe())
+                .build();
 
+        return produtoRepository.save(produto);
     }
 
 }
