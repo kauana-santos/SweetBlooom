@@ -16,7 +16,7 @@ public record ProdutoRequestDTO(
 
         String description,
 
-        @NotBlank(message = "O preço é obrigatório")
+        @NotNull(message = "O preço é obrigatório")
         BigDecimal price,
 
         @NotNull(message = "A categoria é obrigatória")
