@@ -8,7 +8,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Data
+
 public record ProdutoRequestDTO(
 
         @NotNull(message = "O nome do produto é obrigatório")
