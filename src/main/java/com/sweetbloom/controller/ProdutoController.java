@@ -29,4 +29,11 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(salvar);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Produto> deletarProdutos(@PathVariable Long id){
+        produtoService.deletarProduto(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
