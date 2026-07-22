@@ -18,6 +18,11 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
+    public Produto buscarPorId(Long id){
+        return produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+    }
+
     public Produto criarProduto(ProdutoRequestDTO dto) {
         Produto produto = Produto.builder()
                 .name(dto.name())
@@ -30,9 +35,21 @@ public class ProdutoService {
         return produtoRepository.save(produto);
     }
 
-
     public void deletarProduto( Long id){
         produtoRepository.deleteById(id);
+    }
+
+    public Produto atualizarProduto(Long id, ProdutoRequestDTO dto){
+        Produto produto = buscarPorId(id);
+
+        produto.setName(dto.name());
+        produto.setDescription(dto.description());
+        produto.setPrice(dto.price());
+        produto.setCategory(dto.category());
+        produto.setAvaliabe(dto.avaliabe());
+
+        return produtoRepository.save(produto);
+
     }
 
 }
