@@ -36,4 +36,9 @@ public class ProdutoController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("{id}")
+    public Produto atualizarProdutos(@PathVariable Long id, @RequestBody ProdutoRequestDTO dto){
+        return produtoService.atualizarProduto(id, dto);
+    }
+
 }
