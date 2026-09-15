@@ -1,9 +1,9 @@
 package com.sweetbloom.service;
 
-import com.sweetbloom.ProdutoRequestDTO.ProdutoRequestDTO;
+import com.sweetbloom.dto.ProdutoRequestDTO;
+import com.sweetbloom.exception.ProdutoNotFoundException;
 import com.sweetbloom.model.Produto;
 import com.sweetbloom.repository.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +11,11 @@ import java.util.List;
 @Service
 public class ProdutoService {
 
-    @Autowired
-    private ProdutoRepository produtoRepository;
+    final ProdutoRepository produtoRepository;
+
+    public ProdutoService(ProdutoRepository produtoRepository) {
+        this.produtoRepository = produtoRepository;
+    }
 
     public List<Produto> listarTodos(){
         return produtoRepository.findAll();
@@ -20,7 +23,7 @@ public class ProdutoService {
 
     public Produto buscarPorId(Long id){
         return produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new ProdutoNotFoundException());
     }
 
     public Produto criarProduto(ProdutoRequestDTO dto) {
@@ -36,6 +39,9 @@ public class ProdutoService {
     }
 
     public void deletarProduto( Long id){
+        if(!produtoRepository.existsById(id)){
+            throw new ProdutoNotFoundException();
+        }
         produtoRepository.deleteById(id);
     }
 

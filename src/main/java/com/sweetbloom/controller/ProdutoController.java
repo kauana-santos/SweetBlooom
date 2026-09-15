@@ -1,6 +1,6 @@
 package com.sweetbloom.controller;
 
-import com.sweetbloom.ProdutoRequestDTO.ProdutoRequestDTO;
+import com.sweetbloom.dto.ProdutoRequestDTO;
 import com.sweetbloom.model.Produto;
 import com.sweetbloom.service.ProdutoService;
 import jakarta.validation.Valid;
